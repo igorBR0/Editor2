@@ -4,7 +4,7 @@ Instrução:
 Clone o repositorio,apos isso execute o comando:<STRONG>npm install</STRONG> 
 <br>
 Na pasta raiz execute:<STRONG> npm dev run</STRONG>
-<br<
+<br>
 Abra o navegador no endereço: http:localhost:3000
 .CIFF file editor for Videojet labelers
 To run the code:
