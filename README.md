@@ -14,3 +14,6 @@ Clone the repository, then run the command: <STRONG>npm install</STRONG>
 In the root folder run: <STRONG> npm dev run</STRONG>
 <br>
 Open browser on page :http:localhost:3000
+<br>
+🎈 enjoy!
+
