@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Posicionar Campo</title>
+  <style>
+    /* Layout flexbox para organizar o container principal e a área dos inputs */
+    .container-wrapper {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      width: 100%;
+    }
+
+    #container {
+      position: static;
+      border: 1px solid #ccc;
+      width: 50%; /* Ajusta a largura do container principal */
+      height: 100mm;
+      background-color: rgb(255, 255, 255);
+      padding: 10px;
+      overflow: hidden;
+    
+      border : 5px solid black;
+    }
+
+    .campo {
+      position: relative;
+      font-size: 10px;
+    }
+
+    /* Container para os inputs à direita */
+    #inputs-container {
+      width: 50%; /* Ajusta a largura da área de inputs */
+      background-color: #f5f5f5;
+      padding: 10px;
+      border: 1px solid #ccc;
+      height: 100mm;
+      overflow-y: auto;
+      border : 5px solid black;
+    }
+
+    /* Estilo para os campos de input */
+    .input-field {
+      width: 100%; /* Largura total dentro do container */
+      margin-top: 10px;
+      padding: 5px;
+      font-size: 12px;
+      box-sizing: border-box;
+    }
+
+    /* Botão de enviar */
+    .btn {
+      margin-top: 15px;
+      padding: 5px 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #45a049;
+    }
+
+    /* Ajuste da aparência do botão de redirecionamento */
+    button {
+      padding: 5px 15px;
+      margin-top: 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Container-wrapper para organizar os dois containers lado a lado -->
+<div class="container-wrapper">
+  
+  <!-- Container principal que contém os campos -->
+  <div id="container">
+    <% campos.forEach((campo) => { %>
+      <% if (campo.nome === "Field01") { %>
+        <div class="campo" style="left: <%= campo.x %>mm; top: <%= campo.y %>mm;">
+          <div align="center">
+            <svg id="barcode"></svg>
+            <br>
+            <strong><%= campo.valor %></strong>
+          </div>
+          <script>
+            // Gerando o código de barras
+            const numero = <%= campo.valor %>;
+            
+            JsBarcode("#barcode", numero, { displayValue: false, height: 70 });
+          </script>
+         
+        </div>
+      <% }else if (campo.nome === "Field00") { %>
+     
+        <div class="campo" style=" margin: 0px;<%= campo.x %>mm; top: <%= campo.y %>mm;">
+       
+            <h1><strong><%= campo.valor %></strong></h1>
+        
+         
+        </div>
+        
+      <% } 
+      
+      
+      else if (campo.nome === "CB") { %>
+     
+        <div class="campo" style="left: <%= campo.x %>mm; top: <%= campo.y %>mm;">
+          <div align="center">
+            <svg id="barcode1"></svg>
+            <br>
+            <strong><%= campo.valor %></strong>
+          </div>
+        
+          <script>
+            const numero1 = <%= campo.valor %>;
+            JsBarcode("#barcode1", numero1, { displayValue: false, height: 70 });
+          </script>
+         
+        </div>
+       
+      <% } else if (campo.nome === "Produto") { %>
+        <br>
+        <div class="campo" style="text-align:center; <%= campo.x %>mm; top: <%= campo.y %>mm;">
+       
+            <strong><%= campo.valor %></strong>
+        
+         
+        </div>
+    
+      <% } 
+      else if (campo.nome === "Field03") { %>
+        <br>
+        <div class="campo" style="">
+       
+            <strong><%= campo.valor %></strong>
+        
+         
+        </div>
+        
+      <% } 
+      else if (campo.nome === "Field04") { %>
+      
+        <div class="campo" style=" ">
+        
+            <strong><%= campo.valor %></strong>
+       
+        </div>
+        
+   
+      <% }
+
+      else if (campo.nome === "Fabricação" || campo.nome === "Validade" || campo.nome === "Lote" ) { %>
+      
+        <div class="campo" style="display: inline-block;">
+          
+            <strong><%= campo.valor %></strong>
+        </div>
+   
+      <% } %>
+    <% }) %>
+  </div>
+
+  <!-- Container para os inputs à direita -->
+  <div id="inputs-container">
+    <form id="campoForm" action="/submit" method="POST">
+      <% campos.forEach((campo) => { %>
+        <div>
+          <label for="<%= campo.nome %>"><%= campo.nome %>:</label>
+          <input type="text" name="<%= campo.nome %>" id="<%= campo.nome %>" class="input-field" value="<%= campo.valor %>" />
+        </div>
+     
+   
+       
+       
+          
+
+
+
+      <% }) %>
+
+
+ 
+       
+        <% if (campos[0].Offset_validade_type === 'Day') { %> <!-- Comparando a propriedade nome -->
+          <label for="<%= campos[0].Offset_validade_type %>"><%= campos[0].Offset_validade_type %>:</label>
+          <input type="text" name="<%= campos[0].Offset_validade_type %>" id="<%= campos[0].Offset_validade_type %>" class="input-field" value="<%= campos[0].offset_validade_valor %>" />
+        <% } else{ %>
+          <label for="<%= campos[0].Offset_validade_type %>"><%= campos[0].Offset_validade_type %>:</label>
+          <input type="text" name="<%= campos[0].Offset_validade_type %>" id="<%= campos[0].Offset_validade_type %>" class="input-field" value="<%= campos[0].offset_validade_valor %>" />
+        <% } %>
+      
+          
+      
+       
+   
+     
+
+
+      <button type="submit" class="btn">Salvar Alterações</button>
+
+      
+     
+
+    </form>
+  </div>
+
+</div>
+
+<!-- Botão para redirecionar -->
+<button onclick="redirectToSuccess()">Retorna para Upload</button>
+
+<script>
+  function redirectToSuccess() {
+    // Redireciona para a página de upload
+    window.location.href = '/';
+  }
+</script>
+
+</body>
+</html>
+
+

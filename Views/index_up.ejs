@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+ 
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Posicionar Campo</title>
+  <style>
+    #container {
+      
+    position: static;
+    border: 1px solid #ccc;
+    width: 150mm;
+    height: 120mm;
+    background-color: lightgray;
+    /* overflow: auto;  Adiciona rolagem se o conteúdo ultrapassar o tamanho da tela */
+
+    } 
+   .campo {
+      position: relative;
+
+     
+    }
+  </style>
+</head>
+<body>
+  
+
+    <h2>Fazer Upload de Arquivo:</h2>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <label for="file">Escolha um arquivo para fazer upload:</label>
+        <input type="file" name="file" id="file" required />
+        <button type="submit">Upload</button>
+    </form>
+
+    <div id="uploadResult">
+        <% if (typeof file !== 'undefined') { %>
+            <h3>Arquivo enviado com sucesso!</h3>
+            <p><strong>Nome do arquivo:</strong> <%= file.filename %></p>
+            <p><strong>Caminho do arquivo:</strong> <%= file.path %></p>
+        <% } else { %>
+            <p>Nenhum arquivo enviado.</p>
+        <% } %>
+    </div>
+</body>
+</html>
