@@ -17,8 +17,14 @@
     #container {
       position: static;
       border: 1px solid #ccc;
-      width: 50%; /* Ajusta a largura do container principal */
-      height: 100mm;
+      /* width: 50%; /* Ajusta a largura do container principal */
+      /*height: 100mm; */
+
+      
+      width: 7500/12000px; 
+      height: 11200/12000px;
+
+
       background-color: rgb(255, 255, 255);
       padding: 10px;
       overflow: hidden;
@@ -89,7 +95,7 @@
   <div id="container">
     <% campos.forEach((campo) => { %>
       <% if (campo.nome === "Field01") { %>
-        <div class="campo" style="left: <%= campo.x %>mm; top: <%= campo.y %>mm;">
+        <div class="campo" style="left: <%= campo.y %>mm; top: <%= campo.x %>mm;">
           <div align="center">
             <svg id="barcode"></svg>
             <br>
@@ -105,7 +111,7 @@
         </div>
       <% }else if (campo.nome === "Field00") { %>
      
-        <div class="campo" style=" margin: 0px;<%= campo.x %>mm; top: <%= campo.y %>mm;">
+        <div class="campo" style=" margin: 0px; left: <%= campo.y %>px; top: <%= campo.x %>px;">
        
             <h1><strong><%= campo.valor %></strong></h1>
         
@@ -117,7 +123,7 @@
       
       else if (campo.nome === "CB") { %>
      
-        <div class="campo" style="left: <%= campo.x %>mm; top: <%= campo.y %>mm;">
+        <div class="campo" style="left: <%= campo.x %>px; top: <%= campo.y %>px;">
           <div align="center">
             <svg id="barcode1"></svg>
             <br>
@@ -133,7 +139,7 @@
        
       <% } else if (campo.nome === "Produto") { %>
         <br>
-        <div class="campo" style="text-align:center; <%= campo.x %>mm; top: <%= campo.y %>mm;">
+        <div class="campo" style="text-align:center;left: <%= campo.x %>px; top: <%= campo.y %>mm; width: <%= campo.w %>px;height: <%= campo.h %>px">
        
             <strong><%= campo.valor %></strong>
         
@@ -164,7 +170,7 @@
 
       else if (campo.nome === "Fabricação" || campo.nome === "Validade" || campo.nome === "Lote" ) { %>
       
-        <div class="campo" style="display: inline-block;">
+        <div class="campo" style="display: inline-block;left: <%= campo.y %>px; top: <%= campo.x %>px;">
           
             <strong><%= campo.valor %></strong>
         </div>
