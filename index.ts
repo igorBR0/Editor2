@@ -103,12 +103,17 @@ for (let i = 0; i < dataArchiveCiff.Field.length; i++) {
     Offset_validade_type:keyName,
     offset_validade_valor:valor_offset,
     valor : dataArchiveCiff.Field[i].CalcData[0],
-    x : dataArchiveCiff.Field[i].X/1200 ,
-    y : dataArchiveCiff.Field[i].Y/1200,
-    h : dataArchiveCiff.Field[i].H,
-    w : dataArchiveCiff.Field[i].W,
+    //  x : dataArchiveCiff.Field[i].X/120 ,
+    //  y : dataArchiveCiff.Field[i].Y/120,
+     x : dataArchiveCiff.Field[i].x,
+     y : dataArchiveCiff.Field[i].y,
+    h : dataArchiveCiff.Field[i].H/1200,
+    w : dataArchiveCiff.Field[i].W/1200,
     
+
+
     });
+
 
    
        
